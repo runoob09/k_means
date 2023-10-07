@@ -1,7 +1,13 @@
-import k_means
-from k_means_numba import *
-from data import *
+import numpy as np
+from numba import cuda
 
-x = generate_cluster_data(5, 5, 5)
-print(mean_v(x))
-print(k_means.mean_v(x))
+
+@cuda.jit
+def print_thread_idx():
+    thread_idx = cuda.threadIdx.x + cuda.blockIdx.x * cuda.blockDim.x
+    print(cuda.blockIdx.x)
+    print(cuda.blockDim.x)
+    print(cuda.threadIdx.x)
+
+
+print_thread_idx[2, 2]()
