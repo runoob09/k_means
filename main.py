@@ -22,11 +22,10 @@ def plot_scatter(model):
 
 
 if __name__ == '__main__':
-    x = generate_cluster_data(5, 10, 5)
-    # t1 = timeit.timeit(lambda: K1.train(x), number=3)
-    # t2 = timeit.timeit(lambda: K2(n_clusters=5, n_processes=8).train(x), number=3)
-    t3 = timeit.timeit(lambda: K3(n_clusters=5,max_iterations=10).train(x))
-    # print(t1)
-    # 绘制图形
-    # print(t2)
-    print(t3)
+    x = generate_cluster_data(2, 100, 5)
+    t1 = timeit.timeit(lambda: K1(n_clusters=5).train(x), number=3)
+    t2 = timeit.timeit(lambda: K2(n_clusters=5, n_processes=8).train(x), number=3)
+    t3 = timeit.timeit(lambda: K3(n_clusters=5,max_iterations=10).train(x),number=3)
+    print("串行耗时：{:.2f}秒".format(t1))
+    print("多进程耗时：{:.2f}秒".format(t2))
+    print("GPU加速耗时：{:.2f}秒".format(t3))
