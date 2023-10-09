@@ -70,12 +70,9 @@ class KMeans:
         for _ in range(self.max_iterations):
             # 按照最近点进行分组
             group = init_group()
-            start = time.time()
             for x in X:
                 idx, point = choose_near_point(x, self.centroids)
                 group[idx].append(point)
-            end = time.time()
-            print(end-start)
             # 按照分组计算最新中心点值
             new = update_centroids(group, self.n_clusters, shape)
             self.groups = group

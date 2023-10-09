@@ -34,11 +34,9 @@ def distance(vector1, vector2):
 def choose_near_point(X, centers):
     d = np.zeros(len(centers))
     # 创建结果数组
-    start = time.time()
     for i in range(len(centers)):
         d[i] = distance(X, centers[i])
     end = time.time()
-    print(end-start)
     idx = np.argmin(d)
     return idx, X
 
